@@ -1,0 +1,31 @@
+{
+  "name": "mern-blog",
+  "version": "1.0.0",
+  "description": "Blog built with the MERN stack.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WanHrust/MERNBlog.git"
+  },
+  "keywords": [
+    "MERN",
+    "Blog"
+  ],
+  "author": "RustamAV",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WanHrust/MERNBlog/issues"
+  },
+  "homepage": "https://github.com/WanHrust/MERNBlog#readme",
+  "dependencies": {
+    "config": "^3.2.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}
