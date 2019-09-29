@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://rustam:123rustam123@tutorialcluster-w5ddu.gcp.mongodb.net/mern-blog?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://rustam:123rustam123@tutorialcluster-w5ddu.gcp.mongodb.net/mern-blog?retryWrites=true&w=majority",
+    "jwtSecret": "area51_JWT_TOP_SECRET_File"
 }
