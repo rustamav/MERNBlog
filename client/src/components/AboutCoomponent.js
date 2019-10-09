@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Alert from './Alert';
 import { setAlert } from '../actions/alertAction';
+import { register } from '../actions/authAction'; 
 
 const AboutCoomponent = (props) => {
 
@@ -29,7 +30,7 @@ const AboutCoomponent = (props) => {
     const onSubmit = e => {
         e.preventDefault();
         console.log("Submit");
-        console.log(formData);
+        props.register({name, email, password});
     }
 
     const onChange = e => {
@@ -85,9 +86,10 @@ const AboutCoomponent = (props) => {
     );
 }
 AboutCoomponent.propTypes = {
-    setAlert: PropTypes.func.isRequired
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired
 };
 export default connect(
     null,
-    { setAlert }
+    { setAlert, register }
 )(AboutCoomponent);
