@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Alert from './Alert';
 import { setAlert } from '../actions/alertAction';
 
-const AboutCoomponent = (props) => {
+const AboutComponent = (props) => {
     const onClick = e => {
         props.setAlert("Testing the alert", "Warning");
     };
@@ -22,10 +22,10 @@ const AboutCoomponent = (props) => {
         </div>
     );
 }
-AboutCoomponent.propTypes = {
+AboutComponent.propTypes = {
     setAlert: PropTypes.func.isRequired,
 };
 export default connect(
     null,
     { setAlert }
-)(AboutCoomponent);
+)(AboutComponent);
