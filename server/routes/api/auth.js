@@ -59,9 +59,9 @@ router.post('/', [
 
   });
 
-// @route   GET api/auth/user
+// @route   GET api/auth/
 // @desc    Get user data
-// @access  Private
+// @access  Public
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
@@ -70,7 +70,6 @@ router.get('/', auth, async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-  
 });
 
 module.exports = router;
