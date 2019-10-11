@@ -6,7 +6,7 @@ import {
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Alert from './Alert';
-import { setAlert } from '../actions/alertAction';
+import { setAlert } from '../actions/alert';
 
 const AboutComponent = (props) => {
     const onClick = e => {

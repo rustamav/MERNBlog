@@ -2,7 +2,7 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL
 } from './types';
-import {setAlert} from './alertAction';
+import {setAlert} from './alert';
 import axios from 'axios';
 
 export const register = ({name, email, password}) => async dispatch => {

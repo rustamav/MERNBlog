@@ -10,8 +10,8 @@ import {
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Alert from './Alert';
-import { setAlert } from '../actions/alertAction';
-import { register } from '../actions/authAction'; 
+import { setAlert } from '../actions/alert';
+import { register } from '../actions/auth'; 
 
 const RegisterComponent = (props) => {
 

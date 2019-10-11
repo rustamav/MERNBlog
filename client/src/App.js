@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
-import AboutCoomponent from './components/AboutComponent';
-import RegisterComponent from './components/RegisterComponent';
+import AboutCoomponent from './components/About';
+import RegisterComponent from './components/Register';
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
