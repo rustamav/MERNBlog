@@ -1,5 +1,5 @@
 
-import React, { Component, Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   Collapse,
   Navbar,
@@ -18,7 +18,7 @@ const AppNavbar = (props) => {
   const [navBarData, setNavBarData] = useState({
     isOpen: false,
     user:''
-})
+  });
 
   const toggle = () => {
     setNavBarData({...navBarData, isOpen: !navBarData.isOpen});

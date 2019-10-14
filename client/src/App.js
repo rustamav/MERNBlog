@@ -5,6 +5,7 @@ import store from './store';
 import AboutCoomponent from './components/About';
 import RegisterComponent from './components/Register';
 import AppNavbar from './components/AppNavbar';
+import AppNavbarB from './components/AppNavbarB';
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
@@ -28,6 +29,7 @@ function App() {
       <Router>
       <div className="App">
         <AppNavbar></AppNavbar>
+        <AppNavbarB></AppNavbarB>
         <Switch>
           <Route exact path='/' component = {AboutCoomponent}/>
           <Route exact path='/register' component = {RegisterComponent}/>
