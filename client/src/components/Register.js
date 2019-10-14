@@ -7,6 +7,7 @@ import {
     Button
 }
     from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Alert from './Alert';
@@ -31,6 +32,11 @@ const RegisterComponent = (props) => {
     const onChange = e => {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
+
+    if(props.isAuthenticated){
+      return <Redirect to="/"/>
+    }
+
     return (
         <div>
             <Form onSubmit={e => onSubmit(e)}>
@@ -78,9 +84,15 @@ const RegisterComponent = (props) => {
 }
 RegisterComponent.propTypes = {
     setAlert: PropTypes.func.isRequired,
-    register: PropTypes.func.isRequired
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
 };
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
 export default connect(
-    null,
+    mapStateToProps,
     { setAlert, register }
 )(RegisterComponent);
