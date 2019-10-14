@@ -10,6 +10,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+import Login from './components/Login';
 
 if(localStorage.token){
   setAuthToken(localStorage.token);
@@ -28,6 +29,7 @@ function App() {
         <Switch>
           <Route exact path='/' component = {AboutCoomponent}/>
           <Route exact path='/register' component = {RegisterComponent}/>
+          <Route exact path='/login' component = {Login}/>
         </Switch>
         </div>
       </Router>

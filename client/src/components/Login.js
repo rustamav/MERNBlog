@@ -11,41 +11,30 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Alert from './Alert';
 import { setAlert } from '../actions/alert';
-import { register } from '../actions/auth'; 
+import { login } from '../actions/auth'; 
 
-const RegisterComponent = (props) => {
+const Login = (props) => {
 
     const [formData, setFormData] = useState({
-        name: '',
         email:'',
         password: ''
     })
 
-    const {name, email, password} = formData;
+    const {email, password} = formData;
 
     const onSubmit = e => {
         e.preventDefault();
-        props.register({name, email, password});
+        props.login(email, password);
     }
 
     const onChange = e => {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
+
     return (
         <div>
             <Form onSubmit={e => onSubmit(e)}>
               <FormGroup>
-                <Label for='name'>Name</Label>
-                <Input
-                  type='text'
-                  name='name'
-                  id='name'
-                  placeholder='Name'
-                  className='mb-3'
-                  value={name}
-                  onChange={e => onChange(e)}
-                />
-
                 <Label for='email'>Email</Label>
                 <Input
                   type='email'
@@ -68,7 +57,7 @@ const RegisterComponent = (props) => {
                   onChange={e => onChange(e)}
                 />
                 <Button color='dark' style={{ marginTop: '2rem' }} block>
-                  Register
+                  Login
                 </Button>
               </FormGroup>
             </Form>
@@ -76,11 +65,11 @@ const RegisterComponent = (props) => {
         </div>
     );
 }
-RegisterComponent.propTypes = {
+Login.propTypes = {
     setAlert: PropTypes.func.isRequired,
-    register: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired
 };
 export default connect(
     null,
-    { setAlert, register }
-)(RegisterComponent);
+    { setAlert, login }
+)(Login);
