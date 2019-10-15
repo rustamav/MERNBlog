@@ -7,19 +7,19 @@ import { setAlert } from '../actions/alert';
 
 const AboutComponent = props => {
   const onClick = e => {
-    props.setAlert('Testing the alert', 'Warning');
+    props.setAlert('Testing the alert', 'warning');
   };
 
   return (
     <div>
-      <AlertComponent color='danger'></AlertComponent>
+      <AlertComponent></AlertComponent>
       <Button
         onClick={onClick}
         variant='dark'
         style={{ marginTop: '2rem' }}
         block
       >
-        About
+        Test Alert
       </Button>
     </div>
   );
