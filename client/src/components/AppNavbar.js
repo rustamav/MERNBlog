@@ -1,70 +1,58 @@
-
-import React, { Fragment, useState } from 'react';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  Container
-} from 'reactstrap';
+import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 import Logout from './Logout';
-
-const AppNavbar = (props) => {
+const AppNavbar = props => {
   const [navBarData, setNavBarData] = useState({
-    isOpen: false,
-    user:''
+    isOpen: false
   });
 
   const toggle = () => {
-    setNavBarData({...navBarData, isOpen: !navBarData.isOpen});
+    setNavBarData({ ...navBarData, isOpen: !navBarData.isOpen });
   };
 
   const { isAuthenticated, user } = props.auth;
 
   const authLinks = (
     <Fragment>
-      <NavItem>
+      <Nav.Item>
         <span className='navbar-text mr-3'>
           <strong>{user ? `Welcome ${user.name}` : ''}</strong>
         </span>
-      </NavItem>
-      <NavItem>
+      </Nav.Item>
+      <Nav.Item>
         <Logout />
-      </NavItem>
+      </Nav.Item>
     </Fragment>
   );
 
   const guestLinks = (
     <Fragment>
-      <NavItem>
-        <NavLink href="/login">Login</NavLink>
-      </NavItem>
-      <NavItem>
-      </NavItem>
+      <Nav.Item>
+        <Nav.Link href='/login'>Login</Nav.Link>
+      </Nav.Item>
     </Fragment>
   );
-
   return (
-    <div>
-      <Navbar color='dark' dark expand='sm' className='mb-5'>
-        <Container>
-          <NavbarBrand href='/'>MERN Blog</NavbarBrand>
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={navBarData.isOpen} navbar>
-            <Nav className='ml-auto' navbar>
-              {isAuthenticated ? authLinks : guestLinks}
-            </Nav>
-          </Collapse>
-        </Container>
-      </Navbar>
-    </div>
+    <Navbar
+      onToggle={toggle}
+      expanded={navBarData.isOpen}
+      expand='lg'
+      variant='dark'
+      bg='dark'
+    >
+      <Navbar.Brand href='#'>MERN Blog</Navbar.Brand>
+      <Navbar.Toggle aria-controls='basic-navbar-nav' />
+      <Navbar.Collapse id='basic-navbar-nav'>
+        <Nav className='mr-auto'>
+          {isAuthenticated ? authLinks : guestLinks}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
-}
+};
 
 AppNavbar.propTypes = {
   auth: PropTypes.object.isRequired
