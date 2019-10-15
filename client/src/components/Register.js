@@ -69,7 +69,7 @@ const RegisterComponent = props => {
           />
           <Button
             type='submit'
-            color='dark'
+            variant='dark'
             style={{ marginTop: '2rem' }}
             block
           >

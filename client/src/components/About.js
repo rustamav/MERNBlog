@@ -15,7 +15,7 @@ const AboutComponent = props => {
       <AlertComponent color='danger'></AlertComponent>
       <Button
         onClick={onClick}
-        color='dark'
+        variant='dark'
         style={{ marginTop: '2rem' }}
         block
       >
