@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Logout from './Logout';
+
 const AppNavbar = props => {
   const [navBarData, setNavBarData] = useState({
     isOpen: false
@@ -35,6 +36,7 @@ const AppNavbar = props => {
       </Nav.Item>
     </Fragment>
   );
+
   return (
     <Navbar
       onToggle={toggle}
