@@ -3,13 +3,13 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 
 // Post Model
-const Item = require('../../models/Post');
+const Post = require('../../models/Post');
 
 // @route   GET api/posts
 // @desc    Get All posts
 // @access  Public
 router.get('/', (req, res) => {
-  Item.find()
+  Post.find()
     .sort({ date: -1 })
     .then(items => res.json(items));
 });
@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 // @access   Private
 router.get('/:id', auth, async (req, res) => {
   try {
-    const post = await Item.findById(req.params.id);
+    const post = await Post.findById(req.params.id);
 
     if (!post) {
       return res.status(404).json({ msg: 'Post not found' });
@@ -35,24 +35,51 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // @route   POST api/posts
-// @desc    Create a post
+// @desc    Create a post and update
 // @access  Public
-router.post('/', auth, (req, res) => {
+router.post('/', auth, async (req, res) => {
   const newPost = new Post({
     title: req.body.title,
     content: req.body.content,
     author: req.body.author
   });
-  console.log('Saving the post');
-  console.log(req.body);
-  newPost.save().then(item => res.json(item));
+  const postFields = {};
+  postFields.content = req.body.content;
+  postFields.title = req.body.title;
+  postFields.author = req.body.author;
+  try {
+    let post = {};
+    const id = req.body._id;
+    if (id) {
+      post = await Post.findOneAndUpdate(
+        { _id: req.body._id },
+        { $set: postFields },
+        { new: true, upsert: true }
+      );
+      console.log('Post found.');
+      console.log(post);
+    } else {
+      post = new Post({
+        title: req.body.title,
+        content: req.body.content,
+        author: req.body.author
+      });
+      await post.save();
+      console.log('Created new post.');
+      console.log(post);
+    }
+    res.json(post);
+  } catch (error) {
+    console.error(error);
+    req.status(500).send('Server error');
+  }
 });
 
 // @route   DELETE api/posts/:id
 // @desc    Delete A post
 // @access  Private
 router.delete('/:id', auth, (req, res) => {
-  Item.findById(req.params.id)
+  Post.findById(req.params.id)
     .then(item => item.remove().then(() => res.json({ success: true })))
     .catch(err => res.status(404).json({ success: false }));
 });

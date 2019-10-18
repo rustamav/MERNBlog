@@ -23,6 +23,7 @@ const Posts = props => {
       try {
         const res = await axios.get('/api/posts');
         res.data.map((item, key) => {
+          console.log(item);
           setFormData(formData => [...formData, item]);
         });
       } catch (error) {
