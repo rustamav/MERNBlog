@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import Login from './components/Login';
+import ReactPageContainer from './components/ReactPageContainer';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -31,6 +32,7 @@ function App() {
             <Route exact path='/' component={AboutCoomponent} />
             <Route exact path='/register' component={RegisterComponent} />
             <Route exact path='/login' component={Login} />
+            <Route exact path='/post' component={ReactPageContainer} />
           </Switch>
         </div>
       </Router>

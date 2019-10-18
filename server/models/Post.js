@@ -7,13 +7,13 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
-  body: {
-      type: String,
-      required: true
+  content: {
+    type: Object,
+    required: true
   },
   author: {
-      type: String,
-      required: false
+    type: String,
+    required: false
   },
   date: {
     type: Date,

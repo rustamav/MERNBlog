@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const auth = require("../../middleware/auth");
+const auth = require('../../middleware/auth');
 
 // Post Model
 const Item = require('../../models/Post');
@@ -20,10 +20,11 @@ router.get('/', (req, res) => {
 router.post('/', auth, (req, res) => {
   const newPost = new Post({
     title: req.body.title,
-    body: req.body.body,
+    content: req.body.content,
     author: req.body.author
   });
-
+  console.log('Saving the post');
+  console.log(req.body);
   newPost.save().then(item => res.json(item));
 });
 
