@@ -21,16 +21,10 @@ const Posts = props => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        console.log('GET list of posts.');
         const res = await axios.get('/api/posts');
-        console.log(res.data);
         res.data.map((item, key) => {
-          console.log('setting item');
-          console.log(item);
           setFormData(formData => [...formData, item]);
         });
-        console.log('Form data');
-        console.log(formData);
       } catch (error) {
         console.error(error);
       }
@@ -41,11 +35,7 @@ const Posts = props => {
 
   const posts = formData.map(item => {
     return (
-      <HTMLRenderer
-        key={item.content.id}
-        state={item.content}
-        plugins={eplugins}
-      />
+      <HTMLRenderer key={item._id} state={item.content} plugins={eplugins} />
     );
   });
   return <div>{posts}</div>;
