@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
+import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 import { HTMLRenderer } from '@react-page/renderer';
 
 import image from '@react-page/plugins-image';
@@ -33,9 +33,17 @@ const Posts = props => {
     getPosts();
   }, []);
 
+  const onEditButtonClick = id => {
+    console.log('id: ' + id);
+  };
   const posts = formData.map(item => {
     return (
-      <HTMLRenderer key={item._id} state={item.content} plugins={eplugins} />
+      <div>
+        <HTMLRenderer key={item._id} state={item.content} plugins={eplugins} />
+        <Link to={'posts/' + item._id}>
+          <Button onClick={() => onEditButtonClick(item._id)}>Edit</Button>
+        </Link>
+      </div>
     );
   });
   return <div>{posts}</div>;
