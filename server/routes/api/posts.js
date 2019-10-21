@@ -35,14 +35,9 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // @route   POST api/posts
-// @desc    Create a post and update
+// @desc    Update a post with id
 // @access  Public
 router.post('/', auth, async (req, res) => {
-  const newPost = new Post({
-    title: req.body.title,
-    content: req.body.content,
-    author: req.body.author
-  });
   const postFields = {};
   postFields.content = req.body.content;
   postFields.title = req.body.title;
@@ -54,25 +49,33 @@ router.post('/', auth, async (req, res) => {
       post = await Post.findOneAndUpdate(
         { _id: req.body._id },
         { $set: postFields },
-        { new: true, upsert: true }
+        { new: true }
       );
-      console.log('Post found.');
-      console.log(post);
+      res.json(post);
     } else {
-      post = new Post({
-        title: req.body.title,
-        content: req.body.content,
-        author: req.body.author
-      });
-      await post.save();
-      console.log('Created new post.');
-      console.log(post);
+      const error = 'Post ID is missing.';
+      console.error(error);
+      req.status(400).send(error);
     }
-    res.json(post);
   } catch (error) {
     console.error(error);
     req.status(500).send('Server error');
   }
+});
+
+// @route   POST api/posts
+// @desc    Create a post
+// @access  Public
+router.post('/new', auth, async (req, res) => {
+  const post = new Post({
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author
+  });
+  await post.save();
+  console.log('Created new post.');
+  console.log(post);
+  res.json(post);
 });
 
 // @route   DELETE api/posts/:id

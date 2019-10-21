@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import Login from './components/Login';
-import ReactPageContainer from './components/ReactPageContainer';
+import NewPost from './components/NewPost';
 import Post from './components/Post';
 
 if (localStorage.token) {
@@ -33,7 +33,7 @@ function App() {
             <Route exact path='/' component={AboutCoomponent} />
             <Route exact path='/register' component={RegisterComponent} />
             <Route exact path='/login' component={Login} />
-            <Route exact path='/post' component={ReactPageContainer} />
+            <Route exact path='/post' component={NewPost} />
             <Route exact path='/posts/:id/' component={Post} />
           </Switch>
         </div>

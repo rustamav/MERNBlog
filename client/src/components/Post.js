@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-
 import axios from 'axios';
 
 // The editor core
@@ -22,12 +21,14 @@ import '../sass/react-page.css';
 
 const Post = props => {
   const [formData, setFormData] = useState({
-    title: 'Test title',
+    _id: null,
+    title: 'New post',
     content: createEmptyState(),
-    author: 'Rustam'
+    author: ''
   });
 
   useEffect(() => {
+    console.log('Entered Post component');
     const getPosts = async () => {
       try {
         const id = props.match.params.id;
@@ -39,7 +40,7 @@ const Post = props => {
         console.error(error);
       }
     };
-
+    console.log('Getting post');
     getPosts();
   }, []);
 
