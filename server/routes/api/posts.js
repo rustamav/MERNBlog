@@ -35,28 +35,22 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // @route   POST api/posts
-// @desc    Update a post with id
+// @desc    Update the post with ID
 // @access  Public
-router.post('/', auth, async (req, res) => {
+router.post('/:id', auth, async (req, res) => {
+  const id = req.params.id;
   const postFields = {};
+  postFields._id = id;
   postFields.content = req.body.content;
   postFields.title = req.body.title;
   postFields.author = req.body.author;
   try {
-    let post = {};
-    const id = req.body._id;
-    if (id) {
-      post = await Post.findOneAndUpdate(
-        { _id: req.body._id },
-        { $set: postFields },
-        { new: true }
-      );
-      res.json(post);
-    } else {
-      const error = 'Post ID is missing.';
-      console.error(error);
-      req.status(400).send(error);
-    }
+    post = await Post.findOneAndUpdate(
+      { _id: id },
+      { $set: postFields },
+      { new: true }
+    );
+    res.json(post);
   } catch (error) {
     console.error(error);
     req.status(500).send('Server error');
@@ -66,7 +60,7 @@ router.post('/', auth, async (req, res) => {
 // @route   POST api/posts
 // @desc    Create a post
 // @access  Public
-router.post('/new', auth, async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const post = new Post({
     title: req.body.title,
     content: req.body.content,

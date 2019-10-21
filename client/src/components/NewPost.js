@@ -27,7 +27,7 @@ const NewPost = props => {
         };
         const body = JSON.stringify(formData);
 
-        const res = await axios.post(`/api/posts/new`, body, config);
+        const res = await axios.post(`/api/posts/`, body, config);
         console.log('Created new Post');
         console.log(res.data);
         setFormData({ ...formData, _id: res.data._id, postLoaded: true });

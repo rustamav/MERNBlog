@@ -72,7 +72,7 @@ const Post = props => {
 
     try {
       console.log('Saving post to the database.');
-      const res = await axios.post('/api/posts', body, config);
+      const res = await axios.post(`/api/posts/${formData._id}`, body, config);
     } catch (error) {
       console.log(error);
     }
