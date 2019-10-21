@@ -34,7 +34,7 @@ router.get('/:id', auth, async (req, res) => {
   }
 });
 
-// @route   POST api/posts
+// @route   POST api/posts/:id
 // @desc    Update the post with ID
 // @access  Public
 router.post('/:id', auth, async (req, res) => {
