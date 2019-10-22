@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { setAlert } from '../actions/alert';
 import { getPosts } from '../actions/post';
 import PropTypes from 'prop-types';
+import Spinner from './Layout/Spinner';
+
 import image from '@react-page/plugins-image';
 import '@react-page/plugins-image/lib/index.css';
 
@@ -31,7 +33,6 @@ const Posts = props => {
     return (
       <div key={item._id}>
         <HTMLRenderer key={item._id} state={item.content} plugins={eplugins} />
-        {item._id}
         <Link key={`link-${item._id}`} to={'posts/' + item._id}>
           <Button
             key={`button-${item._id}`}
@@ -43,18 +44,20 @@ const Posts = props => {
       </div>
     );
   });
-  return <div>{postsList}</div>;
+  return props.postsLoading ? <Spinner></Spinner> : <div>{postsList}</div>;
 };
 
 Posts.propTypes = {
   getPosts: PropTypes.func.isRequired,
+  postsLoading: PropTypes.bool.isRequired,
   posts: PropTypes.array.isRequired,
   isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  posts: state.post.posts
+  posts: state.post.posts,
+  postsLoading: state.post.postsLoading
 });
 
 export default connect(
