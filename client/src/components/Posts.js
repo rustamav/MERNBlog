@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { HTMLRenderer } from '@react-page/renderer';
-
+import { connect } from 'react-redux';
+import { setAlert } from '../actions/alert';
+import { getPosts } from '../actions/post';
+import PropTypes from 'prop-types';
 import image from '@react-page/plugins-image';
 import '@react-page/plugins-image/lib/index.css';
 
@@ -12,42 +14,50 @@ import slate from '@react-page/plugins-slate'; // The rich text area plugin
 import '@react-page/plugins-slate/lib/index.css'; // Stylesheets for the rich text area plugin
 
 const Posts = props => {
-  const [formData, setFormData] = useState([]);
-
+  const posts = props.posts;
   const eplugins = {
     content: [slate(), image] // Define plugins for content cells. To import multiple plugins, use [slate(), image, spacer, divider]
   };
 
   useEffect(() => {
-    const getPosts = async () => {
-      try {
-        const res = await axios.get('/api/posts');
-        res.data.map((item, key) => {
-          console.log(item);
-          setFormData(formData => [...formData, item]);
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getPosts();
+    props.getPosts();
   }, []);
 
   const onEditButtonClick = id => {
     console.log('id: ' + id);
   };
-  const posts = formData.map(item => {
+
+  const postsList = posts.map(item => {
     return (
-      <div>
+      <div key={item._id}>
         <HTMLRenderer key={item._id} state={item.content} plugins={eplugins} />
-        <Link to={'posts/' + item._id}>
-          <Button onClick={() => onEditButtonClick(item._id)}>Edit</Button>
+        {item._id}
+        <Link key={`link-${item._id}`} to={'posts/' + item._id}>
+          <Button
+            key={`button-${item._id}`}
+            onClick={() => onEditButtonClick(item._id)}
+          >
+            Edit
+          </Button>
         </Link>
       </div>
     );
   });
-  return <div>{posts}</div>;
+  return <div>{postsList}</div>;
 };
 
-export default Posts;
+Posts.propTypes = {
+  getPosts: PropTypes.func.isRequired,
+  posts: PropTypes.array.isRequired,
+  isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  posts: state.post.posts
+});
+
+export default connect(
+  mapStateToProps,
+  { setAlert, getPosts }
+)(Posts);
