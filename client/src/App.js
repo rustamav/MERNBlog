@@ -5,6 +5,7 @@ import store from './store';
 import AboutCoomponent from './components/About';
 import RegisterComponent from './components/Register';
 import AppNavbar from './components/AppNavbar';
+import PrivateRoute from './components/Routing/PrivateRoute';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -33,8 +34,8 @@ function App() {
             <Route exact path='/' component={AboutCoomponent} />
             <Route exact path='/register' component={RegisterComponent} />
             <Route exact path='/login' component={Login} />
-            <Route exact path='/post' component={NewPost} />
-            <Route exact path='/posts/:id/' component={Post} />
+            <PrivateRoute exact path='/post' component={NewPost} />
+            <PrivateRoute exact path='/posts/:id/' component={Post} />
           </Switch>
         </div>
       </Router>
