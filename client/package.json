@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-page/core": "^0.12.1",
+    "@react-page/plugins-image": "^0.12.1",
+    "@react-page/plugins-parallax-background": "^0.12.1",
+    "@react-page/plugins-slate": "^0.12.1",
+    "@react-page/renderer": "^0.12.1",
+    "@react-page/ui": "^0.12.1",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "react": "^16.10.2",

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AlertComponent from './Alert';
 import { setAlert } from '../actions/alert';
+import Posts from './Posts';
 
 const AboutComponent = props => {
   const onClick = e => {
@@ -12,6 +13,7 @@ const AboutComponent = props => {
 
   return (
     <div>
+      <Posts></Posts>
       <AlertComponent></AlertComponent>
       <Button
         onClick={onClick}
