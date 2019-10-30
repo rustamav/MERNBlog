@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 // The editor core
@@ -26,6 +27,8 @@ const Post = props => {
     content: createEmptyState(),
     author: ''
   });
+
+  const [postDeleted, setPostDeleted] = useState(false);
 
   useEffect(() => {
     console.log('Entered Post component');
@@ -73,11 +76,28 @@ const Post = props => {
     try {
       console.log('Saving post to the database.');
       const res = await axios.post(`/api/posts/${formData._id}`, body, config);
+      setPostDeleted(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
+  const onDeleteButtonClick = async () => {
+    const config = {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    };
+    try {
+      console.log('Deleting post from the database.');
+      const res = await axios.delete(`/api/posts/${formData._id}`);
+      setPostDeleted(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (postDeleted) return <Redirect to='/'></Redirect>;
   return (
     <div className='editorCon tainer React-Page'>
       {/* Content area */}
@@ -90,6 +110,9 @@ const Post = props => {
       {/*  Default user interface  */}
       <EditorUI editor={editor} />
       <Button onClick={() => onSaveButtonClick()}>Save</Button>
+      <Button variant='danger' onClick={() => onDeleteButtonClick()}>
+        Delete
+      </Button>
     </div>
   );
 };
