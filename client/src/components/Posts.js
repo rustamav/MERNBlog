@@ -16,6 +16,7 @@ import slate from '@react-page/plugins-slate'; // The rich text area plugin
 import '@react-page/plugins-slate/lib/index.css'; // Stylesheets for the rich text area plugin
 
 const Posts = props => {
+  const isAuthenticated = props.isAuthenticated;
   const posts = props.posts;
   const eplugins = {
     content: [slate(), image] // Define plugins for content cells. To import multiple plugins, use [slate(), image, spacer, divider]
@@ -25,22 +26,16 @@ const Posts = props => {
     props.getPosts();
   }, []);
 
-  const onEditButtonClick = id => {
-    console.log('id: ' + id);
-  };
-
+  const loggedInButtons = () => <div></div>;
   const postsList = posts.map(item => {
     return (
       <div key={item._id}>
         <HTMLRenderer key={item._id} state={item.content} plugins={eplugins} />
-        <Link key={`link-${item._id}`} to={'posts/' + item._id}>
-          <Button
-            key={`button-${item._id}`}
-            onClick={() => onEditButtonClick(item._id)}
-          >
-            Edit
-          </Button>
-        </Link>
+        {isAuthenticated ? (
+          <Link key={`link-${item._id}`} to={'posts/' + item._id}>
+            <Button key={`button-${item._id}`}>Edit</Button>
+          </Link>
+        ) : null}
       </div>
     );
   });
