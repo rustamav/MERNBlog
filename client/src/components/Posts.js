@@ -15,6 +15,7 @@ import '@react-page/plugins-image/lib/index.css';
 import slate from '@react-page/plugins-slate'; // The rich text area plugin
 import '@react-page/plugins-slate/lib/index.css'; // Stylesheets for the rich text area plugin
 
+import '../sass/react-page.css';
 const Posts = props => {
   const isAuthenticated = props.isAuthenticated;
   const posts = props.posts;
@@ -29,7 +30,7 @@ const Posts = props => {
   const loggedInButtons = () => <div></div>;
   const postsList = posts.map(item => {
     return (
-      <div key={item._id}>
+      <div key={item._id} className={'react-page'}>
         <HTMLRenderer key={item._id} state={item.content} plugins={eplugins} />
         {isAuthenticated ? (
           <Link key={`link-${item._id}`} to={'posts/' + item._id}>
